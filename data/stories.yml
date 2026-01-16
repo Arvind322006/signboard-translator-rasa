@@ -1,0 +1,74 @@
+version: "3.1"
+
+stories:
+
+# 🚩 Basic Conversations
+- story: greet and goodbye
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: mood check
+  steps:
+    - intent: mood_unhappy
+    - action: utter_cheer_up
+    - action: utter_did_that_help
+    - intent: affirm
+    - action: utter_happy
+
+# 🚩 Translation Flows
+- story: user asks translation
+  steps:
+    - intent: translate_sign
+    - action: action_translate_sign
+
+- story: translate with follow-up place info
+  steps:
+    - intent: translate_sign
+    - action: action_translate_sign
+    - intent: get_place_info
+    - action: action_get_place_info
+
+# 🚩 Place Information (Generic)
+- story: ask about places
+  steps:
+    - intent: ask_place_info
+    - action: action_get_place_info
+
+# 🚩 City-Specific Stories
+- story: user asks city overview
+  steps:
+    - intent: ask_overview
+    - action: action_get_overview
+
+- story: user asks city speciality
+  steps:
+    - intent: ask_speciality
+    - action: action_get_speciality
+
+- story: user asks tourist places
+  steps:
+    - intent: ask_tourist_places
+    - action: action_get_tourist_places
+
+- story: user asks about food
+  steps:
+    - intent: ask_food
+    - action: action_get_food
+
+- story: user asks cultural/heritage info
+  steps:
+    - intent: ask_famous
+    - action: action_get_famous
+
+- story: user asks roadways/transport
+  steps:
+    - intent: ask_roadways
+    - action: action_get_roadways
+
+- story: user asks highways
+  steps:
+    - intent: ask_highways
+    - action: action_get_highways

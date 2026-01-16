@@ -1,0 +1,204 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - good morning
+    - good evening
+    - வணக்கம்
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+    - catch you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - yeah
+    - correct
+    - exactly
+    - right
+
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - wrong
+    - not really
+
+- intent: mood_great
+  examples: |
+    - I am feeling great
+    - I am doing good
+    - awesome
+    - super happy today
+
+- intent: mood_unhappy
+  examples: |
+    - I am feeling sad
+    - I am upset
+    - not feeling good
+    - I am unhappy
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - am I talking to a human?
+    - who are you?
+
+# 🚩 Translation related
+- intent: translate_sign
+  examples: |
+    - can you translate this sign?
+    - translate this board
+    - what is written on this image?
+    - help me understand the board
+    - read this sign and tell me in English
+    - translate signboard
+    - what does this mean?
+    - தமிழ் translate
+    - வணக்கம் translate to english
+    - change this tamil sentence to english
+    - please convert this to english
+    - read and translate this
+    - convert this board to english
+    - show in english
+    - please translate the image text
+    - can you read this image?
+
+- intent: request_translation
+  examples: |
+    - translate this sign
+    - what does this board say?
+    - please translate the sign
+    - help me read this board
+
+- intent: set_language
+  examples: |
+    - translate to [en](target_lang)
+    - set language to [hi](target_lang)
+    - use [ta](target_lang)
+    - switch to [bn](target_lang)
+    - target language [gu](target_lang)
+    - தமிழில் மொழிபெயர்க்கவும் [ta](target_lang)
+    - மொழியை [ta](target_lang) ஆக மாற்றவும்
+    - நான் [ta](target_lang) மொழி வேண்டுகிறேன்
+    - change translator to [te](target_lang)
+    - switch assistant to [hi](target_lang)
+
+- intent: provide_text
+  examples: |
+    - No Entry
+    - Beware of Dog
+    - Speed Limit 60 Kmph
+    - Danger High Voltage
+    - Exit Here
+    - கவனக்குறிப்பு
+    - அனுமதி இல்லை
+    - நுழைவடைவு இல்லை
+    - சாலை முடக்கம்
+    - வாகனம் நிறுத்த கூடாது
+    - ஆபத்து: உயர் மின்னழுத்தம்
+
+- intent: repeat
+  examples: |
+    - repeat
+    - say it again
+    - can you repeat?
+    - tell me again
+    - please repeat
+    - repeat last translation
+    - மீண்டும் சொல்லுங்கள்
+    - அதை மீண்டும் கேளுங்கள்
+    - தயவுசெய்து மீண்டும் கூறவும்
+
+- intent: inform_image
+  examples: |
+    - [image]
+    - here is an image
+    - uploading a picture
+    - please translate this sign
+    - translate image
+
+# 🚩 City Information Intents
+- intent: ask_overview
+  examples: |
+    - give me an overview of Madurai
+    - tell me about Coimbatore
+    - what is Chennai known for generally?
+    - brief info about Trichy
+    - overview of Madurai city
+    - short description of Chennai
+
+- intent: ask_speciality
+  examples: |
+    - what is special in Madurai
+    - tell me the uniqueness of Coimbatore
+    - why is Chennai famous?
+    - Trichy specialties
+    - what makes Madurai unique?
+    - special culture of Chennai
+
+- intent: ask_tourist_places
+  examples: |
+    - tell me tourist places in Madurai
+    - tourist attractions in Coimbatore
+    - famous places to visit in Chennai
+    - where to go in Trichy
+    - sightseeing in Madurai
+    - list tourist spots in Coimbatore
+
+- intent: ask_food
+  examples: |
+    - what food is special in Madurai
+    - famous dishes of Coimbatore
+    - Chennai street food
+    - Trichy food specialties
+    - must try food in Madurai
+    - what to eat in Chennai
+
+- intent: ask_famous
+  examples: |
+    - culture of Madurai
+    - famous people from Chennai
+    - heritage of Trichy
+    - traditions of Coimbatore
+    - cultural info about Madurai
+    - Chennai historical importance
+
+- intent: ask_roadways
+  examples: |
+    - transport in Madurai
+    - roadways in Coimbatore
+    - Chennai transport system
+    - how to travel in Trichy
+    - bus and train details of Madurai
+    - road transport in Chennai
+
+- intent: ask_highways
+  examples: |
+    - which highway connects Madurai to Dindigul
+    - NH passing through Coimbatore
+    - Chennai to Bangalore highway
+    - Trichy connected highways
+    - route to Dindigul from Madurai
+    - major highways in Chennai
+
+- intent: ask_place_info
+  examples: |
+    - tell me about madurai
+    - details of chennai
+    - overview of coimbatore
+    - famous places in madurai
+    - what is famous in trichy?
+    - special in chennai
+    - what is special in coimbatore
+    - tourist places in madurai
+    - culture of trichy
+    - food in madurai

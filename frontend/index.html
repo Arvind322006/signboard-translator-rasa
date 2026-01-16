@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signboard Translator Bot</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-container {
+      width: 90%;
+      max-width: 1000px;
+      height: 92vh;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background: rgba(255, 255, 255, 0.3);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid rgba(0,0,0,0.1);
+    }
+
+    .chat-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .chat-header p {
+      margin: 8px 0 0;
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 12px 18px;
+      border-radius: 18px;
+      font-size: 1rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      border-bottom-left-radius: 5px;
+      color: #222;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      border-bottom-right-radius: 5px;
+      color: #222;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.5);
+      align-items: center;
+      gap: 10px;
+      border-top: 2px solid rgba(0,0,0,0.1);
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: #fff;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .chat-input button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      background: #4facfe;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .chat-input button:hover {
+      background: #00c6ff;
+    }
+
+    .chat-input label {
+      background: #43e97b;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .chat-input label:hover {
+      background: #38c172;
+    }
+
+    .chat-input input[type="file"] {
+      display: none;
+    }
+
+    .typing {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      font-style: italic;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <!-- 🔹 Welcome Banner -->
+    <div class="chat-header">
+      <h1>🌍 Signboard Translator Bot</h1>
+      <p>
+        Tourists & workers often struggle with language barriers while reading signs.<br>
+        Our chatbot helps you translate signboards, notices, and instructions instantly. 🚀
+      </p>
+    </div>
+
+    <!-- 🔹 Chat Box -->
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">
+        👋 Hi! I’m your Signboard Translator. Type a message or upload a photo of a signboard to translate and explore places!
+      </div>
+    </div> <!-- ✅ properly closed chat-box -->
+
+    <!-- 🔹 Chat Input -->
+    <div class="chat-input">
+      <input id="user-input" type="text" placeholder="Type a message..." />
+      <label for="file-upload">📷</label>
+      <input id="file-upload" type="file" accept="image/*" onchange="uploadImage(event)" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const input = document.getElementById("user-input");
+
+    function appendMessage(content, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.innerHTML = content;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showTyping() {
+      const typingMsg = document.createElement("div");
+      typingMsg.classList.add("message", "bot", "typing");
+      typingMsg.setAttribute("id", "typing");
+      typingMsg.innerText = "Bot is typing...";
+      chatBox.appendChild(typingMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function hideTyping() {
+      const typingMsg = document.getElementById("typing");
+      if (typingMsg) typingMsg.remove();
+    }
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      appendMessage(text, "user");
+      input.value = "";
+      showTyping();
+
+      fetch("http://localhost:5005/webhooks/rest/webhook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender: "user", message: text })
+      })
+      .then(res => res.json())
+      .then(data => {
+        hideTyping();
+        data.forEach(d => {
+          if (d.text) appendMessage(d.text, "bot");
+        });
+      });
+    }
+
+    // 🔹 Press Enter to send
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    function uploadImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        appendMessage(`<img src="${reader.result}" width="200" style="border-radius:10px;"/>`, "user");
+
+        showTyping();
+
+        fetch("http://localhost:5005/webhooks/rest/webhook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sender: "user",
+            message: "[image]",
+            metadata: { image: reader.result }
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          hideTyping();
+          data.forEach(d => {
+            if (d.text) appendMessage(d.text, "bot");
+          });
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>

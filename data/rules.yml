@@ -1,0 +1,61 @@
+version: "3.1"
+
+rules:
+
+# 🚩 Translation Rules
+- rule: Translate when asked
+  steps:
+    - intent: translate_sign
+    - action: action_translate_sign
+
+- rule: Translate uploaded image
+  steps:
+    - intent: inform_image
+    - action: action_translate_sign
+
+# 🚩 Place Info (General)
+- rule: Give place info (old intent)
+  steps:
+    - intent: ask_place_info
+    - action: action_get_place_info
+
+- rule: Provide place info (old intent)
+  steps:
+    - intent: get_place_info
+    - action: action_get_place_info
+
+# 🚩 New City Information Rules
+- rule: Provide overview
+  steps:
+    - intent: ask_overview
+    - action: action_get_overview
+
+- rule: Provide speciality
+  steps:
+    - intent: ask_speciality
+    - action: action_get_speciality
+
+- rule: Provide tourist places
+  steps:
+    - intent: ask_tourist_places
+    - action: action_get_tourist_places
+
+- rule: Provide food info
+  steps:
+    - intent: ask_food
+    - action: action_get_food
+
+- rule: Provide cultural/heritage info
+  steps:
+    - intent: ask_famous
+    - action: action_get_famous
+
+- rule: Provide roadways/transport info
+  steps:
+    - intent: ask_roadways
+    - action: action_get_roadways
+
+- rule: Provide highways info
+  steps:
+    - intent: ask_highways
+    - action: action_get_highways

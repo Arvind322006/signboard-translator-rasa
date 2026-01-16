@@ -1,0 +1,83 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - translate_sign
+  - request_translation
+  - set_language
+  - inform_image
+  - ask_place_info
+  - get_place_info
+  - ask_overview             # general overview of a city
+  - ask_speciality           # famous things, uniqueness
+  - ask_tourist_places       # tourist attractions
+  - ask_food                 # local food/cuisine
+  - ask_famous               # celebrities, culture, heritage
+  - ask_roadways             # roadways, connectivity
+  - ask_highways             # NH routes, major roads
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_goodbye:
+  - text: "Bye, see you soon!"
+
+  utter_iamabot:
+  - text: "I am a Signboard Translator bot, powered by Rasa."
+
+  utter_happy:
+  - text: "Great! Keep smiling 😊"
+
+  utter_cheer_up:
+  - text: "Here’s something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_ask_image:
+  - text: "Please upload an image for translation."
+
+  # Default responses for new intents (can be refined later)
+  utter_ask_overview:
+  - text: "Which city do you want an overview of? (Madurai, Coimbatore, Chennai, Trichy)"
+
+  utter_ask_speciality:
+  - text: "Do you want to know the special things about Madurai, Coimbatore, Chennai, or Trichy?"
+
+  utter_ask_tourist_places:
+  - text: "Which city's tourist attractions are you interested in?"
+
+  utter_ask_food:
+  - text: "Do you want to know about famous foods in Madurai, Coimbatore, Chennai, or Trichy?"
+
+  utter_ask_famous:
+  - text: "Would you like cultural or heritage information about Madurai, Coimbatore, Chennai, or Trichy?"
+
+  utter_ask_roadways:
+  - text: "Which city's roadways or transport details do you need?"
+
+  utter_ask_highways:
+  - text: "Do you want to know National Highways passing through Madurai, Coimbatore, Chennai, or Trichy?"
+
+actions:
+  - action_translate_sign
+  - action_get_place_info
+  - action_get_overview
+  - action_get_speciality
+  - action_get_tourist_places
+  - action_get_food
+  - action_get_famous
+  - action_get_roadways
+  - action_get_highways
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
