@@ -1,0 +1,729 @@
+nano domain.yml
+
+
+
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - translate_sign
+  - request_translation
+  - set_language
+  - inform_image
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_goodbye:
+  - text: "Bye, see you soon!"
+
+  utter_iamabot:
+  - text: "I am a Signboard Translator bot, powered by Rasa."
+
+  utter_happy:
+  - text: "Great! Keep smiling 😊"
+
+  utter_cheer_up:
+  - text: "Here’s something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_ask_image:
+  - text: "Please upload an image for translation."
+
+actions:
+  - action_translate_sign
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+
+
+
+
+
+
+data/nlu.yml
+
+
+
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - good morning
+    - good evening
+    - வணக்கம்
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+    - catch you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - yeah
+    - correct
+    - exactly
+    - right
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - wrong
+    - not really
+
+- intent: mood_great
+  examples: |
+    - I am feeling great
+    - I am doing good
+    - awesome
+    - super happy today
+
+- intent: mood_unhappy
+  examples: |
+    - I am feeling sad
+    - I am upset
+    - not feeling good
+    - I am unhappy
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - am I talking to a human?
+    - who are you?
+# 🚩 Main project-specific intent
+- intent: translate_sign
+  examples: |
+    - can you translate this sign?
+    - translate this board
+    - what is written on this image?
+    - help me understand the board
+    - read this sign and tell me in English
+    - translate signboard
+    - what does this mean?
+    - வண க்கம் translate
+    - தமிழ் translate
+    - தமிழ் translate to english
+    - change this tamil sentence to english
+    - translate this tamil text
+    - please convert வண க்கம் to english
+    - read and translate this
+- intent: request_translation
+  examples: |
+    - translate this sign
+    - what does this board say?
+    - can you read this image?
+    - please translate the sign
+- intent: translate_sign
+  examples: |
+    - can you translate this sign?
+    - translate this board
+    - what is written on this image?
+    - help me understand the board
+    - read this sign and tell me in English
+    - translate signboard
+    - what does this mean?
+    - தமிழ் translate
+    - change this tamil sentence to english
+    - வணக்கம் translate to english
+    - please convert this to english
+- intent: set_language
+  examples: |
+    - translate to [en](target_lang)
+    - set language to [hi](target_lang)
+    - use [ta](target_lang)
+    - switch to [bn](target_lang)
+    - target language [gu](target_lang)
+    - translate to [mr](target_lang)
+    - change language to [ka](target_lang)
+    - set lang [ml](target_lang)
+    - translate this to [te](target_lang)
+    - change to [pa](target_lang)
+    - set the language as [or](target_lang)
+    - switch language to [as](target_lang)
+    - translate into [bn](target_lang)
+    - make it [en](target_lang)
+    - translate to [hi](target_lang)
+    - I want to translate to [en](target_lang)
+    - please switch to [ta](target_lang)
+    - help me translate into [gu](target_lang)
+    - set preferred language [mr](target_lang)
+    - convert to [ka](target_lang)
+    - use language [ml](target_lang)
+    - change translator to [te](target_lang)
+    - speak in [pa](target_lang)
+    - can you translate to [or](target_lang)
+    - switch to language [as](target_lang)
+    - translate text into [bn](target_lang)
+    - set language code [en](target_lang)
+    - translate all to [hi](target_lang)
+    - please change to [ta](target_lang)
+    - change to dialect [gu](target_lang)
+    - translate following to [mr](target_lang)
+    - select language [ka](target_lang)
+    - translate into [ml](target_lang)
+    - language set [te](target_lang)
+    - use translator [pa](target_lang)
+    - operate in [or](target_lang)
+    - ready to translate into [as](target_lang)
+    - change system language [bn](target_lang)
+    - set chat language [en](target_lang)
+    - switch assistant to [hi](target_lang)
+    - translate messages to [ta](target_lang)
+- intent: provide_text
+  examples: |
+    - Entrada Prohibida
+    - मार्ग बंद है
+    - ప్రవేశం నిషిద్ధం
+    - सड़क दायीं ओर मुड़ती है
+    - No Entry
+    - Beware of Dog
+    - सुरक्षित क्षेत्र
+    - ఎగిరిన కాలు ప్రమాదం
+    - Vehicle Parking Only
+    - सावधानी, फिसलन सतह
+    - Exit Here
+    - प्रिंटेड चेतावनी
+    - घумावदार सड़क आगे
+    - धूम्रपान निषेध है
+    - Danger High Voltage
+    - स्टॉप यहाँ करें
+    - सिग्नल जलने पर ही जाएं
+    - यातायात नियंत्रित है
+    - पाँच किलोमीटर आगे टर्न लें
+    - Do Not Enter
+    - Speed Limit 60 Kmph
+    - कैमरा निगरानी क्षेत्र
+    - इस क्षेत्र में धूम्रपान निषिद्ध है
+    - इस क्षेत्र में धूम्रपान निषिद्ध है
+    - Beware of slippery floor
+    - सावधानी से ड्राइव करें
+    - Beware: Wild animals
+    - Keep left
+    - Road closed for maintenance
+    - School zone ahead
+    - No U-turn allowed
+    - Toll plaza ahead
+    - Crosswalk
+    - Watch for children
+    - No parking anytime
+    - Emergency exit only
+    - Pedestrian crossing
+    - Stop sign ahead
+    - Railway crossing ahead
+    - Slow down
+    - Yield right of way
+    - Ahead only
+    - Do not honk
+    - Parking reserved
+    - No entry for trucks
+    - No littering
+    - Danger: slippery road
+    - Hospital nearby
+    - Emergency vehicles only
+    - Filling station
+    - Rest area
+    - No smoking area
+    - Traffic cameras in use
+- intent: repeat
+  examples: |
+    - repeat
+    - say it again
+    - can you repeat?
+    - tell me again
+    - please repeat
+    - repeat last translation
+    - say that once more
+    - could you say it again?
+    - repeat please
+    - again please
+    - one more time
+    - repeat that
+    - say it again please
+    - i didn't catch that
+    - can you say that again
+    - repeat the message
+    - tell me what you said
+    - say that back to me
+    - repeat your words
+    - please say it one more time
+    - say it slower
+    - repeat it louder
+    - again
+    - speak again
+    - replay
+
+- intent: set_language
+  examples: |
+    - தமிழில் மொழிபெயர்க்கவும் [ta](target_lang)
+    - மொழியை [ta](target_lang) ஆக மாற்றவும்
+    - [ta](target_lang) மொழி எடுத்து கொள்ளவேண்டும்
+    - [ta](target_lang) மொழி பயன்படுத்தவும்
+    - நான் [ta](target_lang) மொழி வேண்டுகிறேன்
+    - தமிழுக்கு மாற்று
+    - மொழி [ta](target_lang) அன்று மாற்றவும்
+    - [ta](target_lang) ஐ இலக்காக அமைக்கவும்
+    - இந்த உரையை [ta](target_lang) ஆக மாற்றவும்
+    - மொழி மாற்ற [ta](target_lang)
+- intent: provide_text
+  examples: |
+    - கவனக்குறிப்பு
+    - அனுமதி இல்லை
+    - நுழைவடைவு இல்லை
+    - ஓராய் செல்லவும்
+    - பள்ளி பகுதி
+    - சாலை முடக்கம்
+    - வாகனம் நிறுத்த கூடாது
+    - கவனமாக ஓடுங்கள்
+    - தீங்கு வாய்ப்பு
+    - விபத்து அபாயம்
+    - ஆபத்து: உயர் மின்னழுத்தம்
+    - தடைசெய்யப்பட்டது
+    - மோட்டார் சைக்கிள்கள் தடைசெய்யப்பட்டது
+    - கார் நிறுத்த தடை
+    - நிறுத்துக
+    - அவசர வெளியேற்றம்
+    - பாதுகாப்பு அதிகாரிகள்
+    - நடைபயிற்சி பாதை
+    - குறுக்குவழி இல்லை
+    - தெரியாத இடத்திற்கு போகாதீர்கள்
+    - சிக்னல் இடையில் நிற்கவும்
+    - தடவைகள் உள்ளது
+    - காட்சி முன்னிலையில் நின்றுகொள்ளவும்
+- intent: repeat
+  examples: |
+    - மீண்டும் சொல்லுங்கள்
+    - அதை மீண்டும் கேளுங்கள்
+    - தயவுசெய்து மீண்டும் கூறவும்
+    - மீண்டும் சொல்லவும்
+    - மறுபடியும் சொல்லவும்
+    - நான் தெளிவாக கேட்கவில்லை
+    - அதை மீண்டும் கூற முடியுமா?
+    - என்னை மீண்டும் தெளிவு படுத்துங்கள்
+    - அடுத்த முறை சொல்லவும்
+    - கொஞ்சம் மெதுவாகவும் மீண்டும் சொல்லவும்
+- intent: inform_image
+  examples: |
+    - [image]
+    - here is an image
+    - uploading a picture
+    - please translate this sign
+    - translate image
+
+
+
+
+
+nano rules.yml
+
+
+
+version: "3.1"
+rules:
+- rule: Translate when asked
+  steps:
+  - intent: translate_sign
+  - action: action_translate_sign
+
+- rule: Translate uploaded image
+  steps:
+    - intent: inform_image
+    - action: action_translate_sign
+
+- rule: Handle image uploads
+  steps:
+    - intent: inform
+    - action: action_translate_sign
+
+
+
+
+
+
+
+nano stories.yml
+
+
+
+version: "3.1"
+stories:
+- story: greet and goodbye
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: user asks translation
+  steps:
+    - intent: translate_sign
+    - action: action_translate_sign
+
+- story: mood check
+  steps:
+    - intent: mood_unhappy
+    - action: utter_cheer_up
+    - action: utter_did_that_help
+    - intent: affirm
+    - action: utter_happy
+
+
+
+
+
+
+actions/actions.py
+
+
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+import base64
+import cv2
+import numpy as np
+import easyocr
+from googletrans import Translator
+import re
+
+
+class ActionTranslateSign(Action):
+    def name(self):
+        return "action_translate_sign"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: dict):
+
+        detected_text = ""
+
+        # 1️⃣ Check for uploaded image (metadata)
+        metadata = tracker.latest_message.get("metadata", {})
+        image_data = metadata.get("image")
+
+        if image_data:
+            try:
+                header, encoded = image_data.split(",", 1)
+                img_bytes = base64.b64decode(encoded)
+                nparr = np.frombuffer(img_bytes, np.uint8)
+                img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+                reader = easyocr.Reader(['en','ta'])
+                results = reader.readtext(img)
+
+                if results:
+                    detected_text = " ".join([res[1] for res in results])
+                else:
+                    dispatcher.utter_message(text="❌ Couldn’t detect any text in the image.")
+                    return []
+
+            except Exception as e:
+                dispatcher.utter_message(text=f"⚠️ Error processing image: {str(e)}")
+                return []
+
+        else:
+            # 2️⃣ If no image, fallback to user message
+            user_message = tracker.latest_message.get("text", "").strip()
+            if user_message:
+                # Remove keywords like "translate", "to english"
+                detected_text = re.sub(r"(translate|to english|in english)", "", user_message, flags=re.I).strip()
+
+        # 3️⃣ Translate text
+        if not detected_text:
+            dispatcher.utter_message(text="⚠️ No text provided to translate.")
+            return []
+
+        translator = Translator()
+        translated = translator.translate(detected_text, src="auto", dest="en")
+
+        # 4️⃣ Reply
+        dispatcher.utter_message(text=f"📝 Detected: {detected_text}")
+        dispatcher.utter_message(text=f"🌍 English: {translated.text}")
+        return []
+
+
+
+
+
+
+frontend/nano index.html
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signboard Translator Bot</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-container {
+      width: 90%;
+      max-width: 1000px;
+      height: 92vh;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background: rgba(255, 255, 255, 0.3);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid rgba(0,0,0,0.1);
+    }
+
+    .chat-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .chat-header p {
+      margin: 8px 0 0;
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 12px 18px;
+      border-radius: 18px;
+      font-size: 1rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      border-bottom-left-radius: 5px;
+      color: #222;
+    }
+    .user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      border-bottom-right-radius: 5px;
+      color: #222;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.5);
+      align-items: center;
+      gap: 10px;
+      border-top: 2px solid rgba(0,0,0,0.1);
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: #fff;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .chat-input button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      background: #4facfe;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .chat-input button:hover {
+      background: #00c6ff;
+    }
+
+    .chat-input label {
+      background: #43e97b;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .chat-input label:hover {
+      background: #38c172;
+    }
+
+    .chat-input input[type="file"] {
+      display: none;
+    }
+
+    .typing {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      font-style: italic;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <!-- 🔹 Welcome Banner -->
+    <div class="chat-header">
+      <h1>🌍 Signboard Translator Bot</h1>
+      <p>
+        Tourists & workers often struggle with language barriers while reading signs.<br>
+        Our chatbot helps you translate signboards, notices, and instructions instantly. 🚀
+      </p>
+    </div>
+
+    <!-- 🔹 Chat Box -->
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">👋 Hi! I’m your Signboard Translator. Type a message or upload a photo of a signboard to>    </div>
+
+    <!-- 🔹 Chat Input -->
+    <div class="chat-input">
+      <input id="user-input" type="text" placeholder="Type a message..." />
+      <label for="file-upload">📷</label>
+      <input id="file-upload" type="file" accept="image/*" onchange="uploadImage(event)" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const input = document.getElementById("user-input");
+
+    function appendMessage(content, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.innerHTML = content;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showTyping() {
+      const typingMsg = document.createElement("div");
+      typingMsg.classList.add("message", "bot", "typing");
+      typingMsg.setAttribute("id", "typing");
+      typingMsg.innerText = "Bot is typing...";
+      chatBox.appendChild(typingMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function hideTyping() {
+      const typingMsg = document.getElementById("typing");
+      if (typingMsg) typingMsg.remove();
+    }
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      appendMessage(text, "user");
+      input.value = "";
+      showTyping();
+
+      fetch("http://localhost:5005/webhooks/rest/webhook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender: "user", message: text })
+      })
+      .then(res => res.json())
+      .then(data => {
+        hideTyping();
+        data.forEach(d => {
+          if (d.text) appendMessage(d.text, "bot");
+        });
+      });
+    }
+
+    // 🔹 Press Enter to send
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    function uploadImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        appendMessage(`<img src="${reader.result}" width="200" style="border-radius:10px;"/>`, "user");
+
+        showTyping();
+
+        fetch("http://localhost:5005/webhooks/rest/webhook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sender: "user",
+            message: "[image]",
+            metadata: { image: reader.result }
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          hideTyping();
+          data.forEach(d => {
+            if (d.text) appendMessage(d.text, "bot");
+          });
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
+
+
